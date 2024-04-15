@@ -3,12 +3,15 @@
 import React, { useState } from "react";
 import HomeCard from "./HomeCard";
 import { useRouter } from "next/navigation";
+import MeetingModal from "./MeetingModal";
 
 const MeetingTypeList = () => {
   const [meetingType, setMeetingType] = useState<
     "isJoiningMeeting" | "isScheduleMeeting" | "isInstantMeeting" | undefined
   >();
   const router = useRouter();
+
+  const createMeeting = () => {};
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -39,6 +42,15 @@ const MeetingTypeList = () => {
         description="Meeting recordings"
         handleClick={() => router.push("/recordings")}
         className="bg-yellow-1"
+      />
+
+      <MeetingModal
+        isOpen={meetingType === "isInstantMeeting"}
+        onClose={() => setMeetingType(undefined)}
+        title="Start an Instant Meeting"
+        className="text-center"
+        buttonText="Start Meeting"
+        handleClick={createMeeting}
       />
     </section>
   );
